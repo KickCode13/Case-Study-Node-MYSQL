@@ -1,0 +1,33 @@
+<h1>{{book.title}}</h1>
+<p>Esse livro tem {{book.pageqty}} paginas</p>
+<p><a href="/book/edit/{{book.idbooks}}">Editar</a></p>
+<p><a href="/book/del/{{book.idbooks}}" id="btn-del">Excluir</a></p>
+<a href="/"> Voltar</a>
+
+<script>
+document.getElementById('btn-del').addEventListener('click', function(e){
+    e.preventDefault();
+    const url = this.getAttribute('href');
+    console.log(url);
+    fetch(url,{
+        method:'DELETE',
+        headers:{
+            'Content-Type':"application/json"
+        }
+    })
+    .then(function(res){
+        if(res.ok){
+            alert("Livro deletado!")
+            setTimeout(function(){
+                window.location.href ='/books';
+            }, 500)
+        }
+        else{
+            console.log("Houve um erro")
+        }
+    })
+    .catch(function(err){
+        console.log("Erro na operação", err)
+    })
+})
+</script>
