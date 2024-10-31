@@ -1,0 +1,6 @@
+<h1>Livros cadastrados</h1>
+<ul>
+    {{#each books}}
+        <li>ID: {{this.idbooks}} Título: {{this.title}}, N° paginas: {{this.pageqty}}, <a href="/books/{{this.idbooks}}">Detalhe</a></li>
+    {{/each}}
+</ul>
