@@ -1,0 +1,32 @@
+<h1>Editaçaõ de livro</h1>
+    <form id="form-edit" data-id="{{book.idbooks}}">
+        <input type="hidden" name="id" value="{{book.idbooks}}">
+        <input type="text" name="title" id="title" value="{{book.title}}">
+        <input type="number" name="pageqty" id="pageqty" value="{{book.pageqty}}">
+        <button type="submit" id="btn-edit">Editar</button>
+    </form>
+    <script>
+    document.getElementById('btn-edit').addEventListener('click', function(e){
+        e.preventDefault();
+        console.log('entrou')
+        const id = document.getElementById('form-edit').getAttribute('data-id');
+        const title = document.getElementById('title').value;
+        const pageqty = document.getElementById('pageqty').value;
+        const book ={
+            id, title, pageqty
+        }
+        fetch(`/book/edit/${id}`, {
+            method:'PUT',
+            headers:{
+                'Content-type':'application/json'
+            },
+            body:JSON.stringify(book)
+        })
+        .then(res =>{
+            if(res.ok){
+                window.location.href ='/books';
+            }
+        })
+        
+    });
+    </script>
